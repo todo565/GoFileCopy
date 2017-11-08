@@ -18,12 +18,18 @@ var (
 )
 func main(){
 	flag.Parse()
+	fmt.Println("元dir " + *oPath)
+	fmt.Println("先dir " + *dPath)
+	fmt.Println("拡張子 " + *ext)
 
 	t := time.NewTicker(60 * time.Second)
 	for {
 		select {
 		case <-t.C:
-			 fmt.Println(dirwalk(*oPath,*dPath,*ext))
+			fileList := dirwalk(*oPath,*dPath,*ext)
+			if len(fileList) != 0 {
+				fmt.Println(fileList)
+			}
 		}
 	}
 	t.Stop()
