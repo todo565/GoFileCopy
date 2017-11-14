@@ -100,3 +100,16 @@ func writeDB(pFileList []string){
 		db.Create(&Filelist{FileName:file,Date:time.Now().Format("2006/01/02")})
 	}
 }
+
+func ReadDB(keyword string){
+	db, err := gorm.Open("sqlite3","List.sqlite3")
+	if err != nil {
+		panic("failed to connect database")
+	}
+
+	//read
+	var list Filelist
+	db.Find(&list,"Date = ?",keyword)
+
+
+}
